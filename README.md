@@ -22,7 +22,7 @@ Before you begin, ensure you have the following installed:
 
 1. Clone the repository:
 ```bash
-git clone [your-repository-url]
+git clone https://github.com/kaisarsofi-kxar/threads-clone.git
 cd threads
 ```
 
@@ -88,7 +88,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## 👥 Authors
 
-- Your Name - Initial work
+- kaisarsofi-kxar - Initial work
 
 ## 🙏 Acknowledgments
 
