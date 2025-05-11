@@ -25,6 +25,7 @@ export default function TabsLayout() {
           ),
         }}
       />
+
       <Tabs.Screen
         name="notifications/index"
         options={{
