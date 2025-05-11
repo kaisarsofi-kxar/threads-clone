@@ -11,7 +11,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export function NewPost() {
   const [text, setText] = useState("");
   return (
-    <SafeAreaView ed className="p-4 flex-1">
+    <SafeAreaView className="p-4 flex-1">
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         className="flex-1"
