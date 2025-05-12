@@ -1,6 +1,8 @@
-import { Link } from "expo-router";
+import { supabase } from "@/lib/supabase/supabase";
+import { Link, router } from "expo-router";
 import { useState } from "react";
 import {
+  Alert,
   Keyboard,
   KeyboardAvoidingView,
   Platform,
@@ -17,9 +19,26 @@ export function Signup() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  function handleSignup() {
-    // TODO: Implement signup logic
-    console.log("Signup pressed", { name, email, password, confirmPassword });
+  async function signUpWithEmail() {
+    if (!name || !email || !password || !confirmPassword) {
+      Alert.alert("Please enter all fields");
+      return;
+    }
+    if (password !== confirmPassword) {
+      Alert.alert("Passwords do not match");
+      return;
+    }
+    const {
+      data: { session },
+      error,
+    } = await supabase.auth.signUp({
+      email: email,
+      password: password,
+    });
+    if (error) Alert.alert(error.message);
+    if (session) {
+      router.replace("/");
+    }
   }
 
   return (
@@ -91,7 +110,7 @@ export function Signup() {
             </View>
 
             <Pressable
-              onPress={handleSignup}
+              onPress={signUpWithEmail}
               className="bg-white p-4 rounded-lg mt-6"
             >
               <Text className="text-black font-bold text-center text-lg">

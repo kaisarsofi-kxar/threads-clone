@@ -1,6 +1,8 @@
+import { supabase } from "@/lib/supabase/supabase";
 import { Link } from "expo-router";
 import { useState } from "react";
 import {
+  Alert,
   Keyboard,
   KeyboardAvoidingView,
   Platform,
@@ -14,10 +16,20 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  function handleLogin() {
-    // TODO: Implement login logic
-    console.log("Login pressed", { email, password });
+  async function signInWithEmail() {
+    if (!email || !password) {
+      Alert.alert("Please enter email and password");
+      return;
+    }
+    setLoading(true);
+    const { error } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password,
+    });
+    if (error) Alert.alert(error.message);
+    setLoading(false);
   }
 
   return (
@@ -65,7 +77,7 @@ export function Login() {
             </View>
 
             <Pressable
-              onPress={handleLogin}
+              onPress={signInWithEmail}
               className="bg-white p-4 rounded-lg mt-6"
             >
               <Text className="text-black font-bold text-center text-lg">
