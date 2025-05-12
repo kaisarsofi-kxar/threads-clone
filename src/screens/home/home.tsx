@@ -1,6 +1,7 @@
 import { PostListItem } from "@/components/post-list-item";
 import { dummyPosts } from "@/dummy-data";
 import { Link } from "expo-router";
+import React from "react";
 import { FlatList } from "react-native";
 
 export function Home() {
@@ -10,9 +11,17 @@ export function Home() {
       data={dummyPosts}
       renderItem={({ item }) => <PostListItem post={item} />}
       ListHeaderComponent={() => (
-        <Link href="/new" className="text-blue-500 p-4 text-center text-3xl">
-          New Post
-        </Link>
+        <>
+          <Link href="/new" className="text-blue-500 p-4 text-center text-3xl">
+            New Post
+          </Link>
+          <Link
+            href="/login"
+            className="text-blue-500 p-4 text-center text-3xl"
+          >
+            Login
+          </Link>
+        </>
       )}
     />
   );
